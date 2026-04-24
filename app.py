@@ -7,7 +7,7 @@ nltk.download('punkt_tab')
 nltk.download('stopwords')
 from nltk.stem import WordNetLemmatizer
 wl = WordNetLemmatizer()
-
+nltk.download('wordnet')
 
 # Create Flask app
 app = Flask(__name__)

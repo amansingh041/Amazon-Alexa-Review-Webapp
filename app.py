@@ -3,10 +3,10 @@ import pickle
 import string
 from nltk.corpus import stopwords
 import nltk
-from nltk.stem.porter import PorterStemmer
 nltk.download('punkt_tab')
 nltk.download('stopwords')
-
+from nltk.stem import WordNetLemmatizer
+wl = WordNetLemmatizer()
 
 
 # Create Flask app
@@ -16,7 +16,7 @@ app = Flask(__name__)
 model = pickle.load(open('alexa_review_model_rfc.pkl', 'rb'))
 vectorizer = pickle.load(open('alexa_review_vectorizer_tfidf.pkl', 'rb'))
 
-ps = PorterStemmer()
+
 
 def transformer_text(text):
     text = text.lower()
@@ -34,7 +34,7 @@ def transformer_text(text):
     text = L.copy()
     L.clear()
     for i in text:
-        L.append(ps.stem(i))
+        L.append(wl.lemmatize(i,"v"))
 
     return " ".join(L)
 
